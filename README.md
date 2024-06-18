@@ -79,7 +79,7 @@ Visit `http://127.0.0.1:8000` to access the application.
 
 ## Creating a User and Updating Role to Admin
 
-1. **Register a User**:
+1. **Register a User or Admin**:
 
     - Use Postman or a similar tool to send a POST request to `http://127.0.0.1:8000/api/register`.
     - **URL**: `http://127.0.0.1:8000/api/register`
@@ -90,6 +90,7 @@ Visit `http://127.0.0.1:8000` to access the application.
             "name": "admin",
             "email": "admin@example.com",
             "password": "adminpassword"
+            "role": "user" or "admin"
         }
         ```
 
@@ -115,6 +116,7 @@ Visit `http://127.0.0.1:8000` to access the application.
         "name": "admin",
         "email": "admin@example.com",
         "password": "adminpassword"
+        "role": "admin" or "user"
     }
     ```
 

@@ -7,60 +7,173 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# LibraryManagement-UREEKA
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+LibraryManagement-UREEKA is a backend API built with Laravel for managing a library system. This project allows for registering users, logging in, and performing CRUD operations on books. The API is designed to be used with a frontend interface or tested using tools like Postman.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requirements
 
-## Learning Laravel
+-   PHP 7.4+
+-   Composer
+-   XAMPP for MySQL database
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Installation
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Step 1: Clone the Repository
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+git clone https://github.com/FelixA8/LibraryManagement-UREEKA.git
+cd LibraryManagement-UREEKA
+```
 
-## Laravel Sponsors
+### Step 2: Install Dependencies
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+composer install
+```
 
-### Premium Partners
+### Step 3: Configure Environment Variables
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Rename `.env.example` to `.env` and configure your environment variables, especially the database settings.
 
-## Contributing
+```plaintext
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_user
+DB_PASSWORD=your_database_password
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Step 4: Generate Application Key
 
-## Code of Conduct
+```bash
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Step 5: Run Migrations
 
-## Security Vulnerabilities
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Running the Server
 
-## License
+Start the Laravel development server:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan serve
+```
+
+Visit `http://127.0.0.1:8000` to access the application.
+
+## Using XAMPP for MySQL
+
+1. **Download and Install XAMPP**: [Download XAMPP](https://www.apachefriends.org/index.html)
+2. **Start Apache and MySQL** from the XAMPP Control Panel.
+3. **Create a Database**:
+    - Open [phpMyAdmin](http://localhost/phpmyadmin/)
+    - Create a new database for the project.
+
+## Creating a User and Updating Role to Admin
+
+1. **Register a User**:
+
+    - Use Postman or a similar tool to send a POST request to `http://127.0.0.1:8000/api/register`.
+    - **URL**: `http://127.0.0.1:8000/api/register`
+    - **Method**: POST
+    - **Body**:
+        ```json
+        {
+            "name": "admin",
+            "email": "admin@example.com",
+            "password": "adminpassword"
+        }
+        ```
+
+2. **Access phpMyAdmin**:
+
+    - Open [phpMyAdmin](http://localhost/phpmyadmin/)
+    - Navigate to the database you created for this project.
+
+3. **Modify User Role**:
+    - Find the `users` table.
+    - Locate the user you just created (e.g., `admin@example.com`).
+    - Change the `role` field to `admin`.
+
+## API Endpoints
+
+### Register User
+
+-   **URL**: `http://127.0.0.1:8000/api/register`
+-   **Method**: POST
+-   **Body**:
+    ```json
+    {
+        "name": "admin",
+        "email": "admin@example.com",
+        "password": "adminpassword"
+    }
+    ```
+
+### Login User
+
+-   **URL**: `http://127.0.0.1:8000/api/login`
+-   **Method**: POST
+-   **Body**:
+    ```json
+    {
+        "email": "admin@example.com",
+        "password": "adminpassword"
+    }
+    ```
+
+### List Books
+
+-   **URL**: `http://127.0.0.1:8000/api/books`
+-   **Method**: GET
+
+### Create Book
+
+-   **URL**: `http://127.0.0.1:8000/api/books`
+-   **Method**: POST
+-   **Headers**:
+    -   Authorization: Bearer `token`
+-   **Body**:
+    ```json
+    {
+        "judul": "buku",
+        "isbn": "12345123",
+        "penulis": "lisan al gaib",
+        "tahun_terbit": 2024
+    }
+    ```
+
+### Update Book
+
+-   **URL**: `http://127.0.0.1:8000/api/books/1`
+-   **Method**: PUT
+-   **Headers**:
+    -   Authorization: Bearer `token`
+-   **Body**:
+    ```json
+    {
+        "judul": "buku yang sudah diubah namanya",
+        "isbn": "1234512369",
+        "penulis": "lisan al gaib vq",
+        "tahun_terbit": 2024
+    }
+    ```
+
+### Delete Book
+
+-   **URL**: `http://127.0.0.1:8000/api/books/1`
+-   **Method**: DELETE
+-   **Headers**:
+    -   Authorization: Bearer `token`
+
+## Testing with Postman
+
+You can import the provided Postman collection to quickly test the API endpoints. Access it in root directory `postman_collection.json`.
